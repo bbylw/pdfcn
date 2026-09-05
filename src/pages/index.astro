@@ -1,0 +1,358 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PaperSheet from "../components/PaperSheet.astro";
+
+const features = [
+  {
+    icon: "ph-lightning",
+    title: "双渲染引擎",
+    text: "同一套组件 API 跑在 Takumi 与 Forme 上，按项目需要选引擎，随时下探底层原语。",
+    wide: true,
+  },
+  { icon: "ph-target", title: "零配置", text: "开箱即用，内置合理默认值，装完就能出第一份文档。" },
+  { icon: "ph-eye", title: "实时预览", text: "每个组件与区块都在文档里直接渲染，所见即所得。" },
+  { icon: "ph-palette", title: "完全可定制", text: "代码归你所有，属性与共享主题全部开放。" },
+  { icon: "ph-package", title: "兼容 shadcn/ui", text: "使用同一套注册表格式与 CLI 工作流，一条命令安装。" },
+  { icon: "ph-puzzle-piece", title: "可组合", text: "用聚焦的 React 组件与渲染原语搭建任何版面。" },
+  { icon: "ph-file-text", title: "组件与区块", text: "表格、表单、图表、发票、报告，整版模板直接取用。" },
+];
+
+const components = [
+  "alert", "badge", "card", "data-table", "divider", "form", "graph", "heading",
+  "keep-together", "key-value", "link", "list", "page-break", "page-footer",
+  "page-header", "page-number", "pdf-image", "qrcode", "section", "signature",
+  "stack", "table", "text", "watermark",
+];
+
+const blocks = [
+  "invoice-classic", "invoice-consultant", "invoice-corporate", "invoice-creative",
+  "invoice-minimal", "invoice-modern", "report-financial", "report-marketing",
+  "report-operations", "report-security",
+];
+---
+
+<BaseLayout
+  title="pdfcn · React PDF 组件库"
+  description="免费开源、开箱即用、可定制的 React PDF 组件库。基于 Takumi 与 Forme 双引擎，兼容 shadcn/ui。"
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="mono-label hero-eyebrow">REACT PDF 组件库</p>
+        <h1 class="hero-title">用 React 写文档，<br />输出印刷级 PDF</h1>
+        <p class="hero-sub">
+          免费开源，零配置。基于 Takumi 与 Forme 双引擎，复制组件即可拥有全部代码。
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="/docs">快速开始</a>
+          <a class="btn btn-ghost" href="https://github.com/shadcn-labs/pdfcn" target="_blank" rel="noopener noreferrer">
+            <i class="ph ph-github-logo icon-inline" aria-hidden="true"></i>GitHub
+          </a>
+        </div>
+        <code class="hero-cmd" aria-label="安装命令示例">npx shadcn@latest add @pdfcn/takumi/text</code>
+      </div>
+      <div class="hero-visual crop-marks">
+        <PaperSheet />
+      </div>
+    </div>
+  </section>
+
+  <section class="eco" aria-label="兼容生态">
+    <div class="wrap eco-row">
+      <div class="eco-item">
+        <img src="https://cdn.simpleicons.org/react/211d18" width="26" height="26" alt="React" loading="lazy" />
+        <span>React</span>
+      </div>
+      <div class="eco-item">
+        <img src="https://cdn.simpleicons.org/shadcnui/211d18" width="26" height="26" alt="shadcn/ui" loading="lazy" />
+        <span>shadcn/ui</span>
+      </div>
+      <div class="eco-item">
+        <img src="https://cdn.simpleicons.org/typescript/211d18" width="26" height="26" alt="TypeScript" loading="lazy" />
+        <span>TypeScript</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-word">Takumi</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-word">Forme</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="wrap">
+      <h2 class="section-title">为文档生成而做的组件库</h2>
+      <p class="section-sub">
+        PDF 版面常被当作一次性模板：渲染器专属原语、重复的样式、脆弱的分页逻辑。pdfcn
+        反其道而行，贴近渲染器原语、跨引擎 API 一致，代码可以全部拿走。
+      </p>
+      <div class="feature-grid">
+        {
+          features.map((f) => (
+            <article class:list={["feature-cell", { wide: f.wide }]}>
+              <i class={`ph ${f.icon} feature-icon`} aria-hidden="true" />
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="engines" id="engines">
+    <div class="wrap">
+      <h2 class="section-title">双渲染引擎，同一套 API</h2>
+      <p class="section-sub">选一个引擎起步，组件写法保持不变；需要更细的控制时，随时下探到底层渲染器。</p>
+      <div class="engine-grid">
+        <article class="engine-card crop-marks">
+          <div class="engine-head">
+            <h3>Takumi</h3>
+          </div>
+          <p>
+            Rust 内核的 HTML/CSS 渲染引擎，把熟悉的 Web 排版模型带进 PDF，适合追求版式表现力的团队。
+          </p>
+          <code>npx shadcn@latest add @pdfcn/takumi/text</code>
+          <a href="/docs/components/takumi/text">浏览 Takumi 组件 <i class="ph ph-arrow-right icon-inline" aria-hidden="true"></i></a>
+        </article>
+        <article class="engine-card crop-marks">
+          <div class="engine-head">
+            <h3>Forme</h3>
+          </div>
+          <p>
+            面向文档工作流的 React PDF 渲染器，强调分页、表单与结构化输出，适合票证与报表场景。
+          </p>
+          <code>npx shadcn@latest add @pdfcn/forme/text</code>
+          <a href="/docs/components/forme/text">浏览 Forme 组件 <i class="ph ph-arrow-right icon-inline" aria-hidden="true"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" id="catalog">
+    <div class="wrap">
+      <div class="catalog-head">
+        <h2 class="section-title">24 个组件，10 套整版区块</h2>
+        <a class="btn btn-ghost" href="/docs/components">查看全部文档</a>
+      </div>
+      <p class="catalog-caption mono-label">COMPONENTS</p>
+      <div class="chip-grid" aria-label="组件清单">
+        {
+          components.map((c) => (
+            <a class="chip" href={`/docs/components/takumi/${c}`}>
+              <span class="chip-cn">{c}</span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="catalog-caption mono-label">BLOCKS</p>
+      <div class="chip-grid" aria-label="区块清单">
+        {
+          blocks.map((b) => (
+            <a class="chip" href={`/docs/blocks/takumi/${b}`}>
+              <span class="chip-cn">{b}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner crop-marks">
+      <h2>从一条命令开始</h2>
+      <p>装上第一个组件，渲染第一份文档，剩下的交给排版。</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn btn-solid" href="/docs/installation">安装</a>
+        <a class="btn btn-ghost" href="/docs/themes">看主题</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--line);
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 56px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 56px 100%;
+    background-blend-mode: normal;
+    opacity: 1;
+    position: relative;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(247, 244, 238, 0.55), var(--paper) 78%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(32px, 6vw, 88px);
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+  .hero-eyebrow { margin: 0 0 18px; }
+  .hero-title {
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+  .hero-sub {
+    margin: 22px 0 30px;
+    max-width: 34ch;
+    color: var(--ink-soft);
+    font-size: 18px;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-cmd {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--paper-raised);
+    border: 1px dashed var(--line-strong);
+    padding: 8px 14px;
+  }
+  .hero-visual { max-width: 440px; justify-self: end; width: 100%; }
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 56px; }
+    .hero-visual { justify-self: center; max-width: 380px; }
+  }
+
+  .eco { border-bottom: 1px solid var(--line); }
+  .eco-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(28px, 5vw, 64px);
+    flex-wrap: wrap;
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+  .eco-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+  }
+  .eco-item img { width: 26px; height: 26px; }
+  .eco-word { font-weight: 600; letter-spacing: 0.06em; }
+
+  .section-title { font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; }
+  .section-sub {
+    margin: 14px 0 0;
+    max-width: 60ch;
+    color: var(--ink-soft);
+  }
+
+  .features { padding: 88px 0 72px; border-bottom: 1px solid var(--line); }
+  .feature-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .feature-cell {
+    background: var(--paper);
+    padding: 26px 26px 30px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .feature-cell.wide {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--paper-raised);
+  }
+  .feature-cell.wide h3 { font-size: 26px; }
+  .feature-cell.wide p { max-width: 44ch; }
+  .feature-icon { font-size: 26px; color: var(--accent); display: block; margin-bottom: 14px; }
+  .feature-cell h3 { font-size: 18px; margin-bottom: 8px; }
+  .feature-cell p { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.65; }
+  @media (max-width: 860px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .feature-cell.wide { grid-column: auto; grid-row: auto; }
+  }
+
+  .engines { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  .engine-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+  }
+  .engine-card {
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .engine-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .engine-card h3 { font-size: 24px; }
+  .engine-card p { margin: 0; color: var(--ink-soft); }
+  .engine-card code {
+    font-size: 12.5px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 9px 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .engine-card a { margin-top: auto; font-size: 15px; }
+  @media (max-width: 760px) {
+    .engine-grid { grid-template-columns: 1fr; }
+  }
+
+  .catalog { padding: 88px 0; }
+  .catalog-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .chip-grid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .chip {
+    padding: 12px 14px;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .chip:hover { background: var(--accent-wash); color: var(--accent-deep); text-decoration: none; }
+  .catalog-caption { display: block; margin-top: 36px; }
+
+  .cta { padding: 40px 0 104px; }
+  .cta-inner {
+    border: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+    text-align: center;
+    padding: 72px 24px;
+  }
+  .cta-inner h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; }
+  .cta-inner p { color: var(--ink-soft); margin: 12px 0 28px; }
+</style>

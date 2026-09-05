@@ -1,0 +1,169 @@
+---
+// 产品核心视觉：一张真实的 A4 文档版面（发票样例），容器查询单位驱动，随宽度等比缩放。
+---
+
+<div class="sheet-frame">
+  <div class="sheet" role="img" aria-label="pdfcn 生成的 A4 发票文档版面示例">
+    <div class="sheet-head">
+      <div>
+        <div class="s-brand">Acme Type Foundry</div>
+        <div class="s-muted">2F, 18 Fuxing Road · Shanghai</div>
+      </div>
+      <div class="s-right">
+        <div class="s-doc">INVOICE</div>
+        <div class="s-muted">No. 2026-014</div>
+      </div>
+    </div>
+
+    <div class="s-meta">
+      <div>
+        <div class="s-label">BILL TO</div>
+        <div>Studio Meridian</div>
+        <div class="s-muted">Suite 5, 88 Binjiang Ave.</div>
+      </div>
+      <div>
+        <div class="s-label">DATE</div>
+        <div>2026-08-30</div>
+        <div class="s-label" style="margin-top:1.2em">TERMS</div>
+        <div>Net 30</div>
+      </div>
+    </div>
+
+    <table class="s-table">
+      <thead>
+        <tr><th>Description</th><th class="s-num">Qty</th><th class="s-num">Unit</th><th class="s-num">Amount</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Serif family licence, site-wide</td><td class="s-num">5</td><td class="s-num">48.00</td><td class="s-num">240.00</td></tr>
+        <tr><td>Font embedding kit</td><td class="s-num">1</td><td class="s-num">80.00</td><td class="s-num">80.00</td></tr>
+        <tr><td>Typesetting review, hourly</td><td class="s-num">2</td><td class="s-num">80.00</td><td class="s-num">160.00</td></tr>
+      </tbody>
+    </table>
+
+    <div class="s-total">
+      <span class="s-label">TOTAL DUE</span>
+      <span class="s-amount">$480.00</span>
+    </div>
+
+    <div class="s-stamp">PAID</div>
+
+    <div class="sheet-foot">
+      <span class="s-label">Generated with pdfcn</span>
+      <span class="s-label">Page 1 of 1</span>
+    </div>
+  </div>
+  <div class="frame-marks" aria-hidden="true">
+    <span class="cmyk-bar"><span></span><span></span><span></span><span></span></span>
+    <span class="s-label">A4 · 210 × 297 mm</span>
+  </div>
+</div>
+
+<style>
+  .sheet-frame {
+    container-type: inline-size;
+    width: 100%;
+  }
+  .sheet {
+    aspect-ratio: 210 / 297;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-print);
+    padding: 7cqw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-size: 2.9cqw;
+    line-height: 1.5;
+  }
+  .sheet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 4cqw;
+    border-bottom: 0.35cqw solid var(--ink);
+  }
+  .s-brand {
+    font-weight: 700;
+    font-size: 3.6cqw;
+    letter-spacing: 0.02em;
+  }
+  .s-doc {
+    font-weight: 700;
+    font-size: 3.2cqw;
+    letter-spacing: 0.28em;
+  }
+  .s-right { text-align: right; }
+  .s-muted { color: var(--ink-faint); font-size: 0.92em; }
+  .s-label {
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    letter-spacing: 0.16em;
+    color: var(--ink-faint);
+  }
+  .s-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 4cqw;
+    padding: 4.5cqw 0;
+  }
+  .s-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+  }
+  .s-table th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.72em;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    padding: 0 0 1.2cqw;
+    border-bottom: 1px solid var(--ink);
+  }
+  .s-table td {
+    padding: 1.8cqw 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .s-num { text-align: right; font-variant-numeric: tabular-nums; }
+  .s-total {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 3cqw;
+    padding-top: 3cqw;
+  }
+  .s-amount {
+    font-weight: 700;
+    font-size: 4.4cqw;
+    font-variant-numeric: tabular-nums;
+  }
+  .s-stamp {
+    position: absolute;
+    right: 8cqw;
+    bottom: 16cqw;
+    border: 0.45cqw solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    padding: 1cqw 2.4cqw;
+    transform: rotate(-7deg);
+    font-size: 2.6cqw;
+    opacity: 0.85;
+  }
+  .sheet-foot {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3.5cqw;
+    margin-top: 2cqw;
+    border-top: 1px solid var(--line);
+  }
+  .frame-marks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+  }
+</style>

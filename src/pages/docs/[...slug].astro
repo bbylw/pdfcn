@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("docs");
+  return entries.map((entry) => ({
+    params: { slug: entry.id === "index" ? undefined : entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+const id = entry.id;
+const groupOf = (id: string): { label: string; href: string } | null => {
+  if (id.startsWith("components/takumi")) return { label: "Takumi 组件", href: "/docs/components" };
+  if (id.startsWith("components/forme")) return { label: "Forme 组件", href: "/docs/components" };
+  if (id.startsWith("components")) return { label: "组件", href: "/docs/components" };
+  if (id.startsWith("blocks/takumi")) return { label: "Takumi 区块", href: "/docs/blocks" };
+  if (id.startsWith("blocks/forme")) return { label: "Forme 区块", href: "/docs/blocks" };
+  if (id.startsWith("blocks")) return { label: "区块", href: "/docs/blocks" };
+  if (id.startsWith("themes")) return { label: "主题", href: "/docs/themes" };
+  if (id.startsWith("theming")) return { label: "主题定制", href: "/docs/theming/takumi" };
+  if (id.startsWith("changelog")) return { label: "更新日志", href: "/docs/changelog" };
+  return null;
+};
+const group = groupOf(id);
+const breadcrumb = [
+  { label: "文档", href: "/docs" },
+  ...(group ? [group] : []),
+  { label: entry.data.title },
+];
+---
+
+<BaseLayout title={`${entry.data.title} · pdfcn 文档`} description={entry.data.description}>
+  <DocsLayout breadcrumb={breadcrumb}>
+    <div class="docs-grid" slot="content">
+      <article class="prose">
+        <header class="prose-head">
+          <h1>{entry.data.title}</h1>
+          {entry.data.description && <p class="prose-desc">{entry.data.description}</p>}
+        </header>
+        <Content />
+      </article>
+      {
+        toc.length > 1 && (
+          <nav class="docs-toc" aria-label="本页目录">
+            <div class="docs-toc-title">本页目录</div>
+            <ul>
+              {toc.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`} class={h.depth === 3 ? "toc-h3" : ""}>
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+    </div>
+  </DocsLayout>
+</BaseLayout>

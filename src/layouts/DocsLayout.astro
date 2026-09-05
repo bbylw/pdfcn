@@ -1,0 +1,135 @@
+---
+import { sidebar, engineComponents, engineBlocks } from "../data/docs-nav.ts";
+
+interface Props {
+  breadcrumb?: { label: string; href?: string }[];
+}
+
+const { breadcrumb = [] } = Astro.props;
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path === href + "/";
+const takumiComponents = engineComponents("takumi");
+const formeComponents = engineComponents("forme");
+const takumiBlocks = engineBlocks("takumi");
+const formeBlocks = engineBlocks("forme");
+---
+
+<div class="docs-shell">
+  <aside class="docs-sidebar">
+    <nav class="docs-nav" aria-label="文档导航">
+      {
+        sidebar.map((group) => (
+          <div class="docs-nav-group">
+            <div class="docs-nav-title">{group.title}</div>
+            <ul>
+              {group.title === "组件" ? (
+                <li>
+                  <a href={group.items[0].href} class={isActive(group.items[0].href) ? "active" : ""}>
+                    {group.items[0].label}
+                  </a>
+                  <details open="">
+                    <summary>
+                      <span>Takumi</span>
+                      <i class="ph ph-caret-right" aria-hidden="true" />
+                    </summary>
+                    <ul>
+                      {takumiComponents.map((item) => (
+                        <li>
+                          <a href={item.href} class={isActive(item.href) ? "active" : ""}>
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>
+                      <span>Forme</span>
+                      <i class="ph ph-caret-right" aria-hidden="true" />
+                    </summary>
+                    <ul>
+                      {formeComponents.map((item) => (
+                        <li>
+                          <a href={item.href} class={isActive(item.href) ? "active" : ""}>
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+              ) : group.title === "区块" ? (
+                <li>
+                  <a href={group.items[0].href} class={isActive(group.items[0].href) ? "active" : ""}>
+                    {group.items[0].label}
+                  </a>
+                  <details open="">
+                    <summary>
+                      <span>Takumi</span>
+                      <i class="ph ph-caret-right" aria-hidden="true" />
+                    </summary>
+                    <ul>
+                      {takumiBlocks.map((item) => (
+                        <li>
+                          <a href={item.href} class={isActive(item.href) ? "active" : ""}>
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>
+                      <span>Forme</span>
+                      <i class="ph ph-caret-right" aria-hidden="true" />
+                    </summary>
+                    <ul>
+                      {formeBlocks.map((item) => (
+                        <li>
+                          <a href={item.href} class={isActive(item.href) ? "active" : ""}>
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+              ) : group.title === "主题" ? (
+                group.items.map((item) => (
+                  <li>
+                    <a href={item.href} class={isActive(item.href) ? "active" : ""}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              ) : (
+                group.items.map((item) => (
+                  <li>
+                    <a href={item.href} class={isActive(item.href) ? "active" : ""}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+  </aside>
+  <div class="docs-main">
+    {
+      breadcrumb.length > 0 && (
+        <nav class="docs-breadcrumb" aria-label="面包屑">
+          {breadcrumb.map((c, i) => (
+            <>
+              {i > 0 && <span aria-hidden="true">/</span>}
+              {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+            </>
+          ))}
+        </nav>
+      )
+    }
+    <slot name="content" />
+  </div>
+</div>

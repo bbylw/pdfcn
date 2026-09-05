@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="页面不存在 · pdfcn" description="请求的页面不存在。">
+  <section class="nf">
+    <div class="wrap nf-inner crop-marks">
+      <span class="reg-mark" aria-hidden="true"></span>
+      <p class="mono-label">ERROR 404 · OUT OF REGISTER</p>
+      <h1>这一页没有排进版</h1>
+      <p class="nf-text">请求的页面不存在或已被移走。</p>
+      <div class="nf-cta">
+        <a class="btn btn-solid" href="/">回到首页</a>
+        <a class="btn btn-ghost" href="/docs">查看文档</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding: 96px 0 128px; }
+  .nf-inner {
+    border: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+    text-align: center;
+    padding: 80px 24px;
+    max-width: 640px;
+  }
+  .nf h1 { font-size: 34px; font-weight: 700; margin: 18px 0 10px; }
+  .nf-text { color: var(--ink-soft); margin: 0 0 30px; }
+  .nf-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
