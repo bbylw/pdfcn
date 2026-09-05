@@ -76,16 +76,6 @@ pdfcn 社区位于 [GitHub](https://github.com/shadcn-labs/pdfcn)，你可以在
 
 > 觉得这个项目有用？[赞助我们](https://pdfcn.vercel.app/sponsor) 以支持项目的维护与运营。
 
-## 中文文档站
-
-本仓库同时维护 pdfcn 的**非官方中文文档站**，基于 Astro 7 构建的纯静态站点，线上地址：<https://pdfcn.ndjp.net>。
-
-- 内容：官方 docs 全量中文翻译（组件、区块、主题、主题定制、更新日志），双引擎（Takumi / Forme）独立成册
-- 设计：纸张·印刷制版方向，纸白底、墨色正文、制版蓝强调，A4 纸张核心视觉为纯代码组件
-- 本地开发：`bun install && bun run dev`
-- 构建：`bun run build`，产物在 `dist/`
-- 部署：推送到 main 即触发 `.github/workflows/deploy.yml` 自动构建并发布到 GitHub Pages
-
 ## 数据
 
 ![数据](https://repobeats.axiom.co/api/embed/a4ea68c4f6820d5e1cb0d2681ec946a89b945790.svg "Repobeats 分析图")
